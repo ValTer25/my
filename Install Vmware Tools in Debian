@@ -1,5 +1,5 @@
 sudo apt-get update && sudo apt-get dist-upgrade
-sudo apt-get update && sudo apt-get install build-essential linux-headers-$(uname -r)
+sudo apt-get install build-essential linux-headers-$(uname -r)
 #install CD-ROM
 sudo mount /dev/cdrom /mnt && sudo tar xvfz /mnt/VMwareTools-*.tar.gz -C /tmp/
 sudo perl /tmp/vmware-tools-distrib/vmware-install.pl -d && sudo shutdown -r now
