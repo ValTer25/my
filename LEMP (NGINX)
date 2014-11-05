@@ -1,1 +1,9 @@
-sudo nano /etc/apt/sources.list
+echo "deb http://nginx.org/packages/ubuntu/ precise nginx" | sudo tee /etc/apt/sources.list.d/nginx-stable.list
+echo "deb-src http://nginx.org/packages/ubuntu/ precise nginx" | sudo tee /etc/apt/sources.list.d/nginx-stable.list
+wget http://nginx.org/keys/nginx_signing.key && sudo apt-key add nginx_signing.key
+sudo aptitude update && sudo aptitude install nginx -y
+sudo apt-get install php5-fpm php5-gd php5-json php5-xcache php5-mysql php5-mcrypt php5-imap php5-geoip php5-sqlite php5-curl php5-cli -y
+sudo echo "cgi.fix_pathinfo = 0" >> /etc/php5/fpm/php.ini
+sudo apt-get install mysql-client mysql-server -y
+sudo replace "worker_processes 4" "worker_processes 2" -- /etc/nginx/nginx.conf
+replace "keepalive_timeout 65" "keepalive_timeout 5" -- /etc/nginx/nginx.conf
