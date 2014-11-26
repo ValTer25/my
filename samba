@@ -1,0 +1,31 @@
+sudo apt-get install samba samba-common python-glade2 system-config-samba
+sudo mv /etc/samba/smb.conf /etc/samba/smb.conf.default
+sudo touch /etc/samba/smb.conf
+echo "[global]
+workgroup = WORKGROUP
+server string = Samba Server %v
+netbios name = ubuntu
+security = user
+map to guest = bad user
+dns proxy = no
+#============================ Share Definitions ============================== 
+[all]
+path = /samba/all
+browsable =yes
+writable = yes
+guest ok = yes
+read only = no
+[Share]
+path = /samba/share
+valid users = @smb
+guest ok = no
+writable = yes
+browsable = yes" | sudo tee /etc/samba/smb.conf
+sudo mkdir -p /samba/all
+sudo chmod -R 777 /samba/all/
+sudo chown -R nobody:nogroup /samba/all/
+sudo service smbd restart
+sudo addgroup smb && sudo useradd smb -M -p 111 -g smb
+sudo mkdir -p /samba/share && sudo chmod -R 0770 /samba/share/ && sudo chown -R smb:smb /samba/share/
+echo -e '111\n111'|sudo smbpasswd -sa smb
+sudo service smbd restart
