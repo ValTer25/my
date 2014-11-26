@@ -1,17 +1,16 @@
-sudo apt-get update
-sudo apt-get install python-software-properties
+sudo apt-get install python-software-properties -y
 sudo add-apt-repository ppa:deluge-team/ppa
 sudo apt-get update
 sudo adduser --disabled-password --system --home /var/lib/deluge --gecos "Home Deluge Server" --group deluge
 sudo mkdir /var/log/deluge && sudo touch /var/log/deluge/deluged.log && sudo touch /var/log/deluge/deluge-web.log
 sudo chown deluge:deluge /var/log/deluge/*
-sudo apt-get install deluged deluge-webui deluge-console deluge-common
-echo "# Configuration for /etc/init.d/deluge-daemon
+sudo apt-get install deluged deluge-webui deluge-console deluge-common -y
+echo '# Configuration for /etc/init.d/deluge-daemon
 # The init.d script will only run if this variable non-empty.
 DELUGED_USER="deluge"
 # Should we run at startup?
-RUN_AT_STARTUP="YES"" | sudo tee /etc/default/deluge-daemon
-echo "#!/bin/sh
+RUN_AT_STARTUP="YES"' | sudo tee /etc/default/deluge-daemon
+echo '#!/bin/sh
 ### BEGIN INIT INFO
 # Provides: deluge-daemon
 # Required-Start: $local_fs $remote_fs
@@ -156,6 +155,6 @@ case "$1" in
  ;;
 esac
 
-:" | sudo tee /etc/init.d/deluge-daemon
+:' | sudo tee /etc/init.d/deluge-daemon
 sudo chmod a+x /etc/init.d/deluge-daemon
 sudo update-rc.d deluge-daemon defaults
