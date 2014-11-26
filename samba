@@ -1,6 +1,5 @@
 sudo apt-get install samba samba-common python-glade2 system-config-samba
-sudo mv /etc/samba/smb.conf /etc/samba/smb.conf.default
-sudo touch /etc/samba/smb.conf
+sudo mv /etc/samba/smb.conf /etc/samba/smb.conf.default && sudo touch /etc/samba/smb.conf
 echo "[global]
 workgroup = WORKGROUP
 server string = Samba Server %v
@@ -21,9 +20,7 @@ valid users = @smb
 guest ok = no
 writable = yes
 browsable = yes" | sudo tee /etc/samba/smb.conf
-sudo mkdir -p /samba/all
-sudo chmod -R 777 /samba/all/
-sudo chown -R nobody:nogroup /samba/all/
+sudo mkdir -p /samba/all && sudo chmod -R 777 /samba/all/ && sudo chown -R nobody:nogroup /samba/all/
 sudo service smbd restart
 sudo addgroup smb && sudo useradd smb -M -p 111 -g smb
 sudo mkdir -p /samba/share && sudo chmod -R 0770 /samba/share/ && sudo chown -R smb:smb /samba/share/
