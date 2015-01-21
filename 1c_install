@@ -1,0 +1,53 @@
+@Echo Off
+
+For /F "Tokens=2 Delims=[]" %%i In ('ver') Do (
+   For /F "Tokens=2,3 Delims=. " %%a In ("%%i") Do Set version=%%a.%%b
+)
+
+If "%version%"=="5.1" GoTo XP
+If "%version%"=="5.2" GoTo W2003
+If "%version%"=="6.0" GoTo Vista
+
+:Seven
+REM Windows 7
+REM IF EXIST "%ALLUSERSPROFILE%\1C\1CEStart\1CEStart.cfg" goto w7_l1
+copy "\\1C8-SQL\1CEDistr\dblst\1CEStart_7.cfg" "%ALLUSERSPROFILE%\1C\1CEStart\1CEStart.cfg" 
+
+:w7_l1
+REM IF EXIST "%ALLUSERSPROFILE%\1C\1CEStart\upp.v8i" goto Continue
+copy "\\1C8-SQL\1CEDistr\dblst\upp.v8i" "%ALLUSERSPROFILE%\1C\1CEStart\" /Y
+GoTo Continue
+
+:XP
+REM Windows XP
+
+REM IF EXIST "%ALLUSERSPROFILE%\Application Data\1C\1CEStart\1CEStart.cfg" goto wxp_l1
+copy "\\1C8-SQL\1CEDistr\dblst\1CEStart_xp.cfg" "%ALLUSERSPROFILE%\Application Data\1C\1CEStart\1CEStart.cfg" /Y 
+GoTo Continue
+
+:wxp_l1
+REM IF EXIST "%ALLUSERSPROFILE%\Application Data\1C\1CEStart\upp.v8i" goto Continue
+copy "\\1C8-SQL\1CEDistr\dblst\upp.v8i" "%ALLUSERSPROFILE%\Application Data\1C\1CEStart\"  /Y
+GoTo Continue
+
+:W2003
+REM Windows 2003
+GoTo Continue
+
+:Vista
+REM Windows Vista
+GoTo Continue
+
+:Continue
+IF "%PROCESSOR_ARCHITECTURE%"=="AMD64" GOTO x64
+
+:x86
+REM OS architecture x86
+copy "\\1C8-SQL\1CEDistr\8.3.4.437\backbas.dll" "%ProgramFiles%\1cv8\8.3.4.437\bin\backbas.dll" /Y
+goto End
+
+:x64
+REM OS architecture x64
+copy "\\1C8-SQL\1CEDistr\8.3.4.437\backbas.dll" "%ProgramFiles(x86)%\1cv8\8.3.4.437\bin\backbas.dll" /Y
+
+:End
