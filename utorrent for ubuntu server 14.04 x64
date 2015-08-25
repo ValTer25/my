@@ -6,7 +6,7 @@ sudo chmod 777 /opt/utorrent-server-alpha-v3_3/
 sudo ln -s /opt/utorrent-server-alpha-v3_3/utserver /usr/bin/utserver
 #utserver -settingspath /opt/utorrent-server-alpha-v3_3/
 #sudo  nano utorrent
-#!/bin/sh
+echo '#!/bin/sh
 ### BEGIN INIT INFO
 # Provides:          rtorrent_autostart
 # Required-Start:    $local_fs $remote_fs $network $syslog $netdaemons
@@ -244,4 +244,4 @@ fi
 echo "Usage: $SCRIPTNAME {start|stop|status|restart|force-reload|log}" >&2
 exit 3
 ;;
-esac
+esac' | sudo tee 
