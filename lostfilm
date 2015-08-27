@@ -1,0 +1,24 @@
+#!/bin/bash
+cd /samba/share/
+# Подготовка заголовка If-Modified-Since
+lastmod="$( grep -m 1 Last-Modified response.out )"
+# Создаем header
+header="If-Modified-Since:"${lastmod#*:}
+# Фильтр сериалов
+movies='Scream|Humans|Mr.Robot|Jonathan.Strange|Dominion|S.H.I.E.L.D|Cougar.Tow$
+# Фильтр качества
+#quality='\.720p\.|\.HD\.|Persons.Unknown|Legend.of.the.Seeker|IT.Crowd'
+quality='\.avi'
+wget -vS -O - --header="$header" https://www.lostfilm.tv/rssdd.xml -o response.$
+do
+  link="${link/&amp;/&}"
+  name="${link#*&}"
+# скачанные файлы хранятся в ./Downloads, для истории
+  if [ ! -e /samba/share/$name ]
+  then
+    wget -q --header "Cookie: uid=1333517; pass=033764018b056e862bfc3e0582bec6e$
+#    cp "$name" "/home/qaz/$name"
+  fi
+done
+### crontab -e
+### */15 * * * * /samba/share/lostfilm
