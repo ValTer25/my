@@ -5,7 +5,7 @@ lastmod="$( grep -m 1 Last-Modified response.out )"
 # Создаем header
 header="If-Modified-Since:"${lastmod#*:}
 # Фильтр сериалов
-movies='Scream|Humans|Mr.Robot|Jonathan.Strange|Dominion|S.H.I.E.L.D|Cougar.Tow$
+movies='Humans|Mr.Robot|Jonathan.Strange|Dominion|S.H.I.E.L.D|Cougar.Tow$
 # Фильтр качества
 #quality='\.720p\.|\.HD\.|Persons.Unknown|Legend.of.the.Seeker|IT.Crowd'
 quality='\.avi'
