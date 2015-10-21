@@ -1,0 +1,1 @@
+inotifywait -e create /samba/all/  --format "%w%f" -q -m | while read file; do mv $file /samba/share/;done;
